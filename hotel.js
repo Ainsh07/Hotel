@@ -20,23 +20,20 @@ searchBtn.addEventListener("click", ()=> {
         .then(resp => {
             console.log(resp);
 
-            document.getElementById("count").innerText = `${hotelImages.length} + place found `
+                document.getElementById("count").innerText = `${resp.hotelImages.length} + place found `
                 let data1 = "";
-                resp.hotelImages.map( values => {
+                resp.hotelImages.forEach( values => {
                     data1 += `
-                            <div class="hotel1">
-                                <img src="${values.baseUrl.replace('{size}', values.sizes[0])}" >
-                                <p> ${values.imageId}</p>
-                            </div> `
-                    console.log("DATA: ", data1);
-            
-               
-                // use id here
-                document.getElementsById("hotel-list").innerHTML= data1;
-            });
-    })
-
-    .catch(err => console.error(err)) 
+                    <div class="hotel1">
+                        <img src="${values.baseUrl.replace('{size}', values.sizes[0].suffix)}" >
+                        <p> ${values.imageId}</p>
+                    </div> `
+                });
+                
+                // console.log(hotelList, 'ben')
+                document.getElementById("hotel-list").innerHTML= data1;
+        })
+        .catch(err => console.error(err)) 
     
 
      
